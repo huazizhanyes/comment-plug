@@ -118,7 +118,7 @@
 
           <div class="reply-content">
             <div class="cc cc-to">
-              <a href="#">@{{ ritem.targetUser.nickName }}</a>
+              <a href="#">@{{ ritem.targetUser.nickName}}</a>
             </div>
 
             <div class="cc" v-html="analyzeEmoji(ritem.content)">
@@ -633,7 +633,7 @@ export default {
   margin-top: 2px;
   width: 5px;
   height: 23px;
-  background: #3cb371; /*#1E90FF*/
+  background: #0bbfed; /*#1E90FF*/
 }
 .com-rep {
   display: inline-block;
@@ -708,6 +708,7 @@ export default {
 .cc-to a {
   text-decoration: none;
   color: #409eff;
+  margin-right: 4px;
 }
 .icon-reply {
   display: inline-block;
