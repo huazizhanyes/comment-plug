@@ -5,6 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // 评论数量
+    commentNum: 0,
     // 当前用户信息
     userInfo:{
       userId: 10086,
@@ -62,6 +64,7 @@ export default new Vuex.Store({
     // 添加一级评论
     addCommentLevelOne({commit}, data) {
       commit('__addCommentLevelOne', data)
+      commit('__getCommentNum')
     },
     // 添加二级评论
     addCommentLevelTwo({commit}, data) {
@@ -89,6 +92,10 @@ export default new Vuex.Store({
             }
         })
       }
+    },
+    // 统计评论数量
+    __getCommentNum(state) {
+      state.commentNum = state.commentList.length
     }
   },
 })

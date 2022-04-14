@@ -195,7 +195,7 @@ export default {
     },
     commentNum: {
       type: Number,
-      default: 3
+      default: 0
     },
     authorId: {
       type: Number,

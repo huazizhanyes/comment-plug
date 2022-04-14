@@ -31,7 +31,6 @@ export default {
       placeholder: '说点什么吧',
       minRows: 4,
       maxRows: 4,
-      commentNum: 5,
       avatar: require('@/assets/img/icon/avtar.png'),
     }
   },
@@ -40,8 +39,13 @@ export default {
       // 从vuex里面取评论列表
       commentList: state => state.commentList,
       // 从vuex里面当前用户信息
-      userInfo: state => state.userInfo
+      userInfo: state => state.userInfo,
+      // 评论数量
+      commentNum: state => state.commentNum
     })
+  },
+  mounted() {
+    this.$store.commit('__getCommentNum')
   },
   methods: {
     doSend(content) {
