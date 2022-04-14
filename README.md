@@ -1,6 +1,7 @@
 # comment-plug
 vue + vuex + elementUi 实现评论以及评论回复模块(可发送表情)
-具体使用步骤
+### 跑通Demo
+
 ## 下载依赖
 ```
 npm install
@@ -44,5 +45,5 @@ npm run dev
 | isUseEmoj  | 是否启用表情 | true |
 | commentNum  | 评论数量 | 0 |
 
-## 具体步骤移步博客查看
-See [猿前端](http://blog.hzzy.xyz).
+## 该插件已上传到npm 具体步骤移步博客查看
+See [猿前端](http://blog.hzzy.xyz)
