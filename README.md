@@ -45,5 +45,5 @@ npm run dev
 | isUseEmoj  | 是否启用表情 | true |
 | commentNum  | 评论数量 | 0 |
 
-## 该插件已上传到npm 具体步骤移步博客查看
+## 具体步骤移步博客查看
 See [猿前端](http://blog.hzzy.xyz)
