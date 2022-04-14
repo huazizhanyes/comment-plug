@@ -42,6 +42,7 @@ npm run dev
 | emojiWidth  | 表情框宽 | 560px |
 | showAvatar  | 是否展示头像 | true |
 | isUseEmoj  | 是否启用表情 | true |
+| commentNum  | 评论数量 | 0 |
 
 ## 具体步骤移步博客查看
 See [猿前端](http://blog.hzzy.xyz).
