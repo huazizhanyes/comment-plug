@@ -75,7 +75,7 @@ export default new Vuex.Store({
     // 添加一级评论
     __addCommentLevelOne(state,data) {
       console.log(data)
-      state.commentList.push(data)
+      state.commentList.unshift(data)
     },
     // 添加二级评论
     __addCommentLevelTwo(state,data) {
