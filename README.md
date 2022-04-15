@@ -46,4 +46,4 @@ npm run dev
 | commentNum  | 评论数量 | 0 |
 
 ## 具体步骤移步博客查看
-See [猿前端](http://blog.hzzy.xyz)
+See [猿前端](http://blog.hzzy.xyz/pages/fb8196/)
