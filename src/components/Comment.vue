@@ -1,16 +1,15 @@
 <template>
-  <div class="hbl-fa">
-    <div class="hbl-comm">
+  <div class="hzzy-fa">
+    <div class="hzzy-comm">
       <div class="comment-avatar" v-if="showAvatar">
         <avatar :avatar="avatar"></avatar>
       </div>
       <div class="comment" :style="{ width: commentWidth }">
-        <el-input @focus="showButton(0)" type="textarea" :autosize="{ minRows: minRows, maxRows: maxRows }" :placeholder="placeholder" v-model="textareaMap[0]"> </el-input>
-
-        <div v-if="buttonMap[0]" class="hbl-owo">
+        <textarea class="textarea_outhor" @focus="showButton(0)" maxlength="500" :placeholder="placeholder" v-model="textareaMap[0]"> </textarea>
+        <div v-if="buttonMap[0]" class="hzzy-owo">
           <div v-if="isUseEmoj" :class="pBodyMap[0] ? 'OwO' : 'OwO OwO-open'" class="emoj publish" :style="{ width: emojiWidth }">
             <div class="OwO-logo" @click="pBodyStatus(0)">
-              <span>Emoji表情</span>
+              <span>Emoji</span>
             </div>
             <div class="OwO-body">
               <ul class="OwO-items OwO-items-show">
@@ -20,7 +19,6 @@
               </ul>
             </div>
           </div>
-
           <div class="publish publish-btn">
             <button class="btn" @click="doSend()">发送</button>
             <button @click="cancel(0)" class="btn btn-cancel">取消</button>
@@ -28,28 +26,22 @@
         </div>
       </div>
     </div>
-
     <div class="comm">
       <div class="su com-rep"></div>
       <div class="com-rep com-title">
         评论<span class="com-span">({{ commentNum }})</span>
       </div>
     </div>
-
-    <div v-for="(item, index) in commentList" class="hbl-child">
+    <div v-for="(item, index) in commentList" class="hzzy-child">
       <div class="reply"></div>
       <div class="content">
         <div class="comment-f">
           <avatar :avatar="item.commentUser.avatar ? item.commentUser.avatar : avatar"></avatar>
         </div>
-
         <div class="comment-f">
           <div>
             <div class="nickname author">
               {{ item.commentUser.nickName }}
-            </div>
-            <div v-if="item.commentUser.userId === authorId" class="icon author">
-              {{ label }}
             </div>
             <div class="date">
               {{ item.createDate }}
@@ -66,12 +58,12 @@
           </div>
 
           <div class="comment" :style="{ width: commentWidth }" v-if="replyMap[item.id]" :showAvatar="showAvatar">
-            <el-input @focus="showButton(item.id)" type="textarea" :autosize="{ minRows: minRows, maxRows: maxRows }" :placeholder="placeholder" v-model="textareaMap[item.id]"> </el-input>
+            <textarea class="textarea_hf" @focus="showButton(item.id)" :placeholder="placeholder" v-model="textareaMap[item.id]"> </textarea>
 
-            <div v-if="buttonMap[item.id]" class="hbl-owo">
+            <div v-if="buttonMap[item.id]" class="hzzy-owo">
               <div v-if="isUseEmoj" :class="pBodyMap[item.id] ? 'OwO' : 'OwO OwO-open'" class="emoj publish" :style="{ width: emojiWidth }">
                 <div class="OwO-logo" @click="pBodyStatus(item.id)">
-                  <span>Emoji表情</span>
+                  <span>Emoji</span>
                 </div>
                 <div class="OwO-body">
                   <ul class="OwO-items OwO-items-show">
@@ -107,9 +99,6 @@
               <div class="nickname author">
                 {{ ritem.commentUser.nickName }}
               </div>
-              <div v-if="ritem.commentUser.userId === authorId" class="icon author">
-                {{ label }}
-              </div>
               <div class="date">
                 {{ ritem.createDate }}
               </div>
@@ -132,12 +121,12 @@
             </div>
 
             <div class="comment" :style="{ width: commentWidth }" v-if="replyMap[ritem.id]" :showAvatar="showAvatar">
-              <el-input @focus="showButton(ritem.id)" type="textarea" :autosize="{ minRows: minRows, maxRows: maxRows }" :placeholder="placeholder" v-model="textareaMap[ritem.id]"> </el-input>
+              <textarea class="textarea_hf" @focus="showButton(ritem.id)" :placeholder="placeholder" v-model="textareaMap[ritem.id]"> </textarea>
 
-              <div v-if="buttonMap[ritem.id]" class="hbl-owo">
+              <div v-if="buttonMap[ritem.id]" class="hzzy-owo">
                 <div :class="pBodyMap[ritem.id] ? 'OwO' : 'OwO OwO-open'" class="emoj publish" :style="{ width: emojiWidth }">
                   <div class="OwO-logo" @click="pBodyStatus(ritem.id)">
-                    <span>Emoji表情</span>
+                    <span>Emoji</span>
                   </div>
                   <div class="OwO-body">
                     <ul class="OwO-items OwO-items-show">
@@ -167,6 +156,7 @@
 
 <script>
 import avatar from './Avatar.vue'
+import {emoji} from './emoji.js'
 export default {
   props: {
     emojiWidth: {
@@ -201,10 +191,6 @@ export default {
       type: Number,
       default: 1
     },
-    label: {
-      type: String,
-      default: '作者'
-    },
     commentList: {
       type: Array,
       default: () => []
@@ -225,81 +211,7 @@ export default {
       buttonMap: [],
       pBodyMap: [],
       textareaMap: [],
-      OwOlist: [
-        //表情包和表情路径
-        { title: '微笑', url: 'weixiao.gif' },
-        { title: '嘻嘻', url: 'xixi.gif' },
-        { title: '哈哈', url: 'haha.gif' },
-        { title: '可爱', url: 'keai.gif' },
-        { title: '可怜', url: 'kelian.gif' },
-        { title: '挖鼻', url: 'wabi.gif' },
-        { title: '吃惊', url: 'chijing.gif' },
-        { title: '害羞', url: 'haixiu.gif' },
-        { title: '挤眼', url: 'jiyan.gif' },
-        { title: '闭嘴', url: 'bizui.gif' },
-        { title: '鄙视', url: 'bishi.gif' },
-        { title: '爱你', url: 'aini.gif' },
-        { title: '泪', url: 'lei.gif' },
-        { title: '偷笑', url: 'touxiao.gif' },
-        { title: '亲亲', url: 'qinqin.gif' },
-        { title: '生病', url: 'shengbing.gif' },
-        { title: '太开心', url: 'taikaixin.gif' },
-        { title: '白眼', url: 'baiyan.gif' },
-        { title: '右哼哼', url: 'youhengheng.gif' },
-        { title: '左哼哼', url: 'zuohengheng.gif' },
-        { title: '嘘', url: 'xu.gif' },
-        { title: '衰', url: 'shuai.gif' },
-        { title: '吐', url: 'tu.gif' },
-        { title: '哈欠', url: 'haqian.gif' },
-        { title: '抱抱', url: 'baobao.gif' },
-        { title: '怒', url: 'nu.gif' },
-        { title: '疑问', url: 'yiwen.gif' },
-        { title: '馋嘴', url: 'chanzui.gif' },
-        { title: '拜拜', url: 'baibai.gif' },
-        { title: '思考', url: 'sikao.gif' },
-        { title: '汗', url: 'han.gif' },
-        { title: '困', url: 'kun.gif' },
-        { title: '睡', url: 'shui.gif' },
-        { title: '钱', url: 'qian.gif' },
-        { title: '失望', url: 'shiwang.gif' },
-        { title: '酷', url: 'ku.gif' },
-        { title: '色', url: 'se.gif' },
-        { title: '哼', url: 'heng.gif' },
-        { title: '鼓掌', url: 'guzhang.gif' },
-        { title: '晕', url: 'yun.gif' },
-        { title: '悲伤', url: 'beishang.gif' },
-        { title: '抓狂', url: 'zhuakuang.gif' },
-        { title: '黑线', url: 'heixian.gif' },
-        { title: '阴险', url: 'yinxian.gif' },
-        { title: '怒骂', url: 'numa.gif' },
-        { title: '互粉', url: 'hufen.gif' },
-        { title: '书呆子', url: 'shudaizi.gif' },
-        { title: '愤怒', url: 'fennu.gif' },
-        { title: '感冒', url: 'ganmao.gif' },
-        { title: '心', url: 'xin.gif' },
-        { title: '伤心', url: 'shangxin.gif' },
-        { title: '猪', url: 'zhu.gif' },
-        { title: '熊猫', url: 'xiongmao.gif' },
-        { title: '兔子', url: 'tuzi.gif' },
-        { title: '喔克', url: 'ok.gif' },
-        { title: '耶', url: 'ye.gif' },
-        { title: '棒棒', url: 'good.gif' },
-        { title: '不', url: 'no.gif' },
-        { title: '赞', url: 'zan.gif' },
-        { title: '来', url: 'lai.gif' },
-        { title: '弱', url: 'ruo.gif' },
-        { title: '草泥马', url: 'caonima.gif' },
-        { title: '神马', url: 'shenma.gif' },
-        { title: '囧', url: 'jiong.gif' },
-        { title: '浮云', url: 'fuyun.gif' },
-        { title: '给力', url: 'geili.gif' },
-        { title: '围观', url: 'weiguan.gif' },
-        { title: '威武', url: 'weiwu.gif' },
-        { title: '话筒', url: 'huatong.gif' },
-        { title: '蜡烛', url: 'lazhu.gif' },
-        { title: '蛋糕', url: 'dangao.gif' },
-        { title: '发红包', url: 'fahongbao.gif' }
-      ]
+      OwOlist: emoji
     }
   },
   components: {
@@ -309,8 +221,6 @@ export default {
     //事件处理器
 
     showButton(index) {
-      //this.showFlag = true;
-      console.log(index + 'index')
       this.$set(this.buttonMap, index, true)
     },
     cancel(index) {
@@ -318,8 +228,6 @@ export default {
       if (index !== 0) {
         this.$set(this.replyMap, index, false)
       }
-      console.log(index + 'index')
-      //this.showFlag = false;
     },
     doSend() {
       // 一级评论发送事件
@@ -388,11 +296,32 @@ export default {
 }
 .publish {
   margin-top: 10px;
+  margin-right: 131px;
   display: inline-block;
   vertical-align: top;
 }
 .publish-btn {
   float: right;
+}
+.textarea_outhor{
+  padding: 10px;
+  box-sizing: border-box;
+  color: #363d4c;
+  border: 1px solid #999;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 99%;
+  height: 80px;
+}
+.textarea_hf{
+  padding: 10px;
+  box-sizing: border-box;
+  color: #363d4c;
+  border: 1px solid #999;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 80%;
+  height: 60px;
 }
 .btn {
   width: 70px; /* 宽度 */
@@ -463,6 +392,7 @@ export default {
   -webkit-animation: a 5s infinite ease-in-out;
 }
 .OwO .OwO-body {
+  width: 50%;
   position: absolute;
   background: #fff;
   border: 1px solid #ddd;
@@ -491,7 +421,7 @@ export default {
 }
 .OwO .OwO-items .OwO-item {
   background: #f7f7f7;
-  padding: 5px 10px;
+  padding: 5px 3px;
   border-radius: 5px;
   display: inline-block;
   margin: 0 10px 12px 0;
@@ -507,7 +437,7 @@ export default {
   -webkit-animation: a 5s infinite ease-in-out;
 }
 .OwO .OwO-body .OwO-bar {
-  width: 100%;
+  width: 5%;
   height: 30px;
   border-top: 1px solid #ddd;
   background: #fff;
@@ -530,7 +460,7 @@ export default {
 .tmsg-r-info {
   margin: 10px 0;
 }
-.tmsg-r-info input {
+.tmsg-r-info textarea {
   height: 30px;
   border-radius: 4px;
   background: #f4f6f7;
@@ -623,7 +553,7 @@ export default {
   color: #64609e;
   cursor: pointer;
 }
-.hbl-owo {
+.hzzy-owo {
   text-align: left;
 }
 .comm {
@@ -646,10 +576,10 @@ export default {
 .com-span {
   font-size: 16px;
 }
-.hbl-fa {
+.hzzy-fa {
   text-align: left;
 }
-.hbl-comm {
+.hzzy-comm {
   padding: 40px;
 }
 
@@ -671,12 +601,13 @@ export default {
   display: inline-block;
 }
 .icon {
-  background: #dff0d8;
-  color: #3c763d;
+  margin-left: 2px;
+  background: #f6b80e;
+  color: #eb3510;
   border-radius: 5px;
-  padding: 3px 6px;
-  font-size: 12px;
-  font-weight: 400px;
+  padding: 1px 4px;
+  font-size: 10px;
+  font-weight: 600px;
 }
 .date {
   font-size: 12px;
@@ -718,7 +649,7 @@ export default {
 .icon-hf {
   margin-top: 2px;
 }
-.hbl-child {
+.hzzy-child {
   padding: 20px;
 }
 </style>

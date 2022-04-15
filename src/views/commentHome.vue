@@ -6,11 +6,8 @@
         @doChidSend="doChidSend(arguments)"
         :commentList="commentList"
         :commentNum="commentNum"
-        :label="label"
         :avatar="avatar"
         :placeholder="placeholder"
-        :minRows="minRows"
-        :maxRows="maxRows"
         :isUseEmoj="true"
       ></comment>
     </div>
@@ -27,10 +24,7 @@ export default {
   data() {
     return {
       commentId: 10,
-      label: 'SVIP',
       placeholder: '说点什么吧',
-      minRows: 4,
-      maxRows: 4,
       avatar: require('@/assets/img/icon/avtar.png'),
     }
   },
@@ -71,6 +65,7 @@ export default {
           isFirstLevel: 1,
           // 暂时写死恢复评论的人
           commentUser: {
+            label: '大佬',
             userId: 10010,
             nickName: 'mqq',
             avatar: 'https://huazizhanye.oss-cn-beijing.aliyuncs.com/blogs/images/mqq.jpg'
